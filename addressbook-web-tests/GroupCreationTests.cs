@@ -1,12 +1,8 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI;
 using System;
-using System.Diagnostics.Eventing.Reader;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
 
 namespace WebAddressbookTests
 {
@@ -17,15 +13,6 @@ namespace WebAddressbookTests
         private string baseURL;
         private StringBuilder verificationErrors;
         private bool acceptNextAlert = true;
-       
-        private string loginUser;
-        private string passwordUser;
-
-        private string textGroup_name;
-        private string textGroup_header;
-        private string textGroup_footer;
-
-
 
         [SetUp]
         public void SetupTest()
@@ -33,18 +20,6 @@ namespace WebAddressbookTests
             driver = new ChromeDriver();
             baseURL = "http://localhost/addressbook/";
             verificationErrors = new StringBuilder();
-            
-            //данные пользователя для входа
-            loginUser = "admin";
-            passwordUser= "secret";
-            
-            //заполнение формы
-            textGroup_name = "Текст в поле Group name";
-            textGroup_header = "Текст в поле Group header (Logo)";
-            textGroup_footer = "Текст в поле Group footer (Comment)";
-
-
-            
         }
 
         [TearDown]
@@ -61,35 +36,74 @@ namespace WebAddressbookTests
             Assert.AreEqual("", verificationErrors.ToString());
         }
 
+
         [Test]
+        //[TestCase("admin", "secret", "текст в поле group header (logo)", "текст в поле group name", "текст в поле group footer (comment)")]
+        //[TestCase("user", "qwerty", "!@#$%^&*()", "!@#$%^&*()", "!@#$%^&*()")]
 
         public void GroupCreationTest()
         {
-            //авторизация
+            OpenHomePage();
+            Login(new AccountData("admin", "secret"));
+            GoToGroupsPage();
+            InitNewGroupCreation();
+            FillGroupForm(new GroupData("текст в поле group name", "текст в поле group header (logo)", "текст в поле group footer (comment)"));
+            //GroupData group = new GroupData("текст в поле group name");
+            //group.Header = "текст в поле group header (logo)";
+            //group.Footer = "текст в поле group footer (comment)";
+            //FillGroupForm(group);
+            SubmitGroupCreation();
+            ReturnToGroupsPage();
+        }
+
+        private void OpenHomePage()
+        {            
             driver.Navigate().GoToUrl(baseURL);
+        }
+
+        private void Login(AccountData account)
+        {
             driver.FindElement(By.Name("user")).Click();
             driver.FindElement(By.Name("user")).Clear();
-            driver.FindElement(By.Name("user")).SendKeys(loginUser);
+            driver.FindElement(By.Name("user")).SendKeys(account.Username);
             driver.FindElement(By.Name("pass")).Click();
             driver.FindElement(By.Name("pass")).Clear();
-            driver.FindElement(By.Name("pass")).SendKeys(passwordUser);
+            driver.FindElement(By.Name("pass")).SendKeys(account.Password);
             driver.FindElement(By.XPath("//input[@value='Login']")).Click();
+        }
 
-            //создание группы
+        private void GoToGroupsPage()
+        {
             driver.FindElement(By.LinkText("groups")).Click();
+        }
+
+        private void InitNewGroupCreation()
+        {
             driver.FindElement(By.Name("new")).Click();
+        }
+
+        private void FillGroupForm(GroupData group)
+        {
             driver.FindElement(By.Name("group_name")).Click();
             driver.FindElement(By.Name("group_name")).Clear();
-            driver.FindElement(By.Name("group_name")).SendKeys(textGroup_name);
+            driver.FindElement(By.Name("group_name")).SendKeys(group.Name);
             driver.FindElement(By.Name("group_header")).Click();
             driver.FindElement(By.Name("group_header")).Clear();
-            driver.FindElement(By.Name("group_header")).SendKeys(textGroup_header);
+            driver.FindElement(By.Name("group_header")).SendKeys(group.Header);
             driver.FindElement(By.Name("group_footer")).Click();
             driver.FindElement(By.Name("group_footer")).Clear();
-            driver.FindElement(By.Name("group_footer")).SendKeys(textGroup_footer);
+            driver.FindElement(By.Name("group_footer")).SendKeys(group.Footer);
+        }
+
+        private void SubmitGroupCreation()
+        {
             driver.FindElement(By.Name("submit")).Click();
+        }
+        private void ReturnToGroupsPage()
+        {
             driver.FindElement(By.LinkText("group page")).Click();
         }
+
         private bool IsElementPresent(By by)
         {
             try
