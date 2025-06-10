@@ -38,9 +38,6 @@ namespace WebAddressbookTests
 
 
         [Test]
-        //[TestCase("admin", "secret", "текст в поле group header (logo)", "текст в поле group name", "текст в поле group footer (comment)")]
-        //[TestCase("user", "qwerty", "!@#$%^&*()", "!@#$%^&*()", "!@#$%^&*()")]
-
         public void GroupCreationTest()
         {
             OpenHomePage();
@@ -48,10 +45,6 @@ namespace WebAddressbookTests
             GoToGroupsPage();
             InitNewGroupCreation();
             FillGroupForm(new GroupData("текст в поле group name", "текст в поле group header (logo)", "текст в поле group footer (comment)"));
-            //GroupData group = new GroupData("текст в поле group name");
-            //group.Header = "текст в поле group header (logo)";
-            //group.Footer = "текст в поле group footer (comment)";
-            //FillGroupForm(group);
             SubmitGroupCreation();
             ReturnToGroupsPage();
         }

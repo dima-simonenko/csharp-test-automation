@@ -14,10 +14,9 @@ namespace WebAddressbookTests
 
         public Square(int size)
         {
-            //явная ссылка на поле size
             this.size = size;
         }
-
+       
         //public int getSize()
         //{ 
         //    return size;
@@ -38,8 +37,6 @@ namespace WebAddressbookTests
             {
                 size = value;
             }
-
-
         }
     }
 }

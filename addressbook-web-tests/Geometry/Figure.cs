@@ -9,10 +9,6 @@ namespace WebAddressbookTests
     internal class Figure
     {
         private bool colored = false;
-        //public Figure(bool colored)
-        //{
-        //    this.colored = colored;
-        //}
         public bool Colored
         {
             get

@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 namespace WebAddressbookTests
 {
     [TestClass]
-    public class UnitTest1
+    public class GeometricTests
     {
         [TestMethod]
         public void TestMethodSquare()
