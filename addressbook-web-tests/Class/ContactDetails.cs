@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebAddressbookTests
 {
-    internal class ContactDetails
+    public class ContactDetails
     {
         private PersonalInfo personal;
         private JobInfo job;

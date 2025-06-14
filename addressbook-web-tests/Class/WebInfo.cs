@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebAddressbookTests
 {
-    internal class WebInfo
+    public class WebInfo
     {
         private string homepage;
 

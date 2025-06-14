@@ -2,7 +2,7 @@
 using System;
 using System.Security.Cryptography;
 
-namespace WebAddressbookTests
+namespace Geometry
 {
     [TestClass]
     public class GeometricTests

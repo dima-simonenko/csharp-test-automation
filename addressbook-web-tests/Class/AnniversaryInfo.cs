@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebAddressbookTests
 {
-    internal class AnniversaryInfo
+    public class AnniversaryInfo
     {
         private int aday;
         private string amonth;
