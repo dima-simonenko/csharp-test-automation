@@ -17,11 +17,13 @@ namespace WebAddressbookTests
     public class AddNewContactTests : TestBase
     {
         [Test]
-        public void TheAddNewContact()
+        public void AddNewContact()
         {
-            OpenHomePage();
-            Login(new AccountData("admin", "secret"));
-            InitNewContact();
+            //app.navigationHelper.OpenHomePage();
+            app.Navigation.OpenHomePage();
+            app.Auth.Login(new AccountData("admin", "secret"));
+            app.Contact.InitNewContact();
+            //contactHelper.InitNewContact();
 
             ContactDetails contact = new ContactDetails
             (new PersonalInfo
@@ -37,10 +39,11 @@ namespace WebAddressbookTests
             new AnniversaryInfo
                 (25, "August", 2022));
 
-            FillContactForm(contact);
-            SelectGroupFromDropdown("[none]");
-            SubmitAddNewContact();
-            ReturnToHomePage();
+            app.Contact.FillContactForm(contact);
+            app.Contact.SelectGroupFromDropdown("[none]");
+            app.Contact.SubmitAddNewContact();
+            app.Navigation.ReturnToHomePage();
+            app.Auth.Logout();
         }
 }
     }

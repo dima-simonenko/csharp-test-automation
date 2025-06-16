@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="WebAddressbookTests.TestBase">
+    <Position X="6.5" Y="2.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAABAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>tests\TestBase.cs</FileName>
+      <NewMemberFileName>Tests\TestBase.cs</NewMemberFileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="app" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="WebAddressbookTests.AddNewContactTests">
+    <Position X="5" Y="5.5" Width="1.75" />
+    <InheritanceLine Type="WebAddressbookTests.TestBase" ManuallyRouted="true">
+      <Path>
+        <Point X="7.5" Y="3.546" />
+        <Point X="7.5" Y="5.346" />
+        <Point X="5.875" Y="5.346" />
+        <Point X="5.875" Y="5.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>tests\AddNewContactTests.cs</FileName>
+      <NewMemberFileName>Tests\AddNewContactTests.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAddressbookTests.DeleteGroupTests">
+    <Position X="5" Y="4" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>tests\DeleteGroupTests.cs</FileName>
+      <NewMemberFileName>Tests\DeleteGroupTests.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAddressbookTests.CreateGroupTests">
+    <Position X="5" Y="7" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>tests\CreateGroupTests.cs</FileName>
+      <NewMemberFileName>Tests\CreateGroupTests.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAddressbookTests.ApplicationManager">
+    <Position X="9.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAACAAAAASAAAAAAAAAIBCAABEAQCA=</HashCode>
+      <FileName>appmanager\ApplicationManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="contactHelper" />
+      <Field Name="driver" />
+      <Field Name="groupHelper" />
+      <Field Name="loginHelper" />
+      <Field Name="navigationHelper" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="WebAddressbookTests.ContactHelper" Collapsed="true">
+    <Position X="14" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAECAAAAAgAAAABAAAgAAAAAQAgUgAAAAA=</HashCode>
+      <FileName>appmanager\ContactHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAddressbookTests.GroupHelper" Collapsed="true">
+    <Position X="16.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAEBEAAAAAAAAAAAABA=</HashCode>
+      <FileName>appmanager\GroupHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAddressbookTests.LoginHelper" Collapsed="true">
+    <Position X="18" Y="4" Width="1.5" />
+    <InheritanceLine Type="WebAddressbookTests.HelperBase" ManuallyRouted="true" FixedFromPoint="true">
+      <Path>
+        <Point X="20" Y="1.812" />
+        <Point X="20" Y="3.625" />
+        <Point X="18.75" Y="3.625" />
+        <Point X="18.75" Y="4" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>appmanager\LoginHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAddressbookTests.NavigationHelper" Collapsed="true">
+    <Position X="19.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIgAAAAAAAABAAAAAAAAAAAAAAIAACAABAAAAAAACA=</HashCode>
+      <FileName>appmanager\NavigationHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAddressbookTests.HelperBase" Collapsed="true">
+    <Position X="19.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>appmanager\HelperBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="OpenQA.Selenium.IWebDriver" Collapsed="true">
+    <Position X="12" Y="2.25" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

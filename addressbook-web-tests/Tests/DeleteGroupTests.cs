@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.BiDi.Modules.BrowsingContext;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -16,12 +17,13 @@ namespace WebAddressbookTests
         [Test]
         public void DeleteGroup()
         {
-            OpenHomePage();
-            Login(new AccountData("admin", "secret"));
-            GoToGroupsPage();
-            SelectGroupCheckbox(2);
-            DeleteGroups();
-            ReturnToGroupPage();
+            app.Navigation.OpenHomePage();
+            app.Auth.Login(new AccountData("admin", "secret"));
+            app.Navigation.GoToGroupsPage();
+            app.Groups.SelectGroupCheckbox(1);
+            app.Groups.DeleteGroups();
+            app.Navigation.ReturnToGroupPage();
+            app.Auth.Logout();
         }
     }
 }

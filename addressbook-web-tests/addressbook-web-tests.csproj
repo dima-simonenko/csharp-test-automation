@@ -134,27 +134,34 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class\AccountData.cs" />
-    <Compile Include="Class\AnniversaryInfo.cs" />
-    <Compile Include="Class\BirthdayInfo.cs" />
-    <Compile Include="Class\ContactDetails.cs" />
-    <Compile Include="Class\ContactInfo.cs" />
-    <Compile Include="Class\JobInfo.cs" />
-    <Compile Include="Class\PersonalInfo.cs" />
-    <Compile Include="Class\TestBase.cs" />
-    <Compile Include="Class\WebInfo.cs" />
-    <Compile Include="Geometry\Circle.cs" />
-    <Compile Include="Geometry\Figure.cs" />
-    <Compile Include="Geometry\Square.cs" />
+    <Compile Include="appmanager\ApplicationManager.cs" />
+    <Compile Include="appmanager\ContactHelper.cs" />
+    <Compile Include="appmanager\HelperBase.cs" />
+    <Compile Include="appmanager\GroupHelper.cs" />
+    <Compile Include="model\AccountData.cs" />
+    <Compile Include="model\AnniversaryInfo.cs" />
+    <Compile Include="model\BirthdayInfo.cs" />
+    <Compile Include="model\ContactDetails.cs" />
+    <Compile Include="model\ContactInfo.cs" />
+    <Compile Include="model\JobInfo.cs" />
+    <Compile Include="model\PersonalInfo.cs" />
+    <Compile Include="tests\TestBase.cs" />
+    <Compile Include="model\WebInfo.cs" />
+    <Compile Include="geometry\Circle.cs" />
+    <Compile Include="geometry\Figure.cs" />
+    <Compile Include="geometry\Square.cs" />
+    <Compile Include="appmanager\LoginHelper.cs" />
+    <Compile Include="appmanager\NavigationHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\AddNewContactTests.cs" />
-    <Compile Include="Geometry\GeometricTests.cs" />
-    <Compile Include="Tests\CreateGroupTests.cs" />
-    <Compile Include="Class\GroupData.cs" />
-    <Compile Include="Tests\DeleteGroupTests.cs" />
+    <Compile Include="tests\AddNewContactTests.cs" />
+    <Compile Include="geometry\GeometricTests.cs" />
+    <Compile Include="tests\CreateGroupTests.cs" />
+    <Compile Include="model\GroupData.cs" />
+    <Compile Include="tests\DeleteGroupTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
