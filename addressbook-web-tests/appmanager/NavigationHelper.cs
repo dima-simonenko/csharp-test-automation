@@ -18,41 +18,54 @@ namespace WebAddressbookTests
             this.baseURL = baseURL;
         }
 
-        //   Жёсткий переход по указанной ссылке
+        // Жёсткий переход на главную страницу по baseURL
         public void OpenHomePage()
         {
             driver.Navigate().GoToUrl(baseURL);
         }
 
-        //   Мягкий переход по гиперссылке
+        // Переход по гиперссылке "groups"
         public void GoToGroupsPage()
         {
-            Thread.Sleep(500);
+            ShortDelay();
             driver.FindElement(By.LinkText("groups")).Click();
         }
 
+        // Переход по гиперссылке "add new" на страницу создания контакта
+        public void GoToAddNewContactPage()
+        {
+            ShortDelay();
+            driver.FindElement(By.LinkText("add new")).Click();
+        }
+
+        // Переход по гиперссылке "group page" после создания/удаления группы
         public void ReturnToGroupPage()
         {
-            Thread.Sleep(500);
+            ShortDelay();
             driver.FindElement(By.LinkText("group page")).Click();
         }
 
+        // Переход по гиперссылке "home page" (после создания контакта)
         public void ReturnToHomePage()
         {
-            Thread.Sleep(500);
+            ShortDelay();
             driver.FindElement(By.LinkText("home page")).Click();
         }
 
-        //   Поиск по наименованию (передаётся как параметр)
+        // =======================
+        //   Универсальные методы
+        // =======================
+
+        // Переход по гиперссылке по её видимому тексту (например: "groups", "home page")
         public void ClickLinkTextName(string name)
         {
             driver.FindElement(By.LinkText(name)).Click();
         }
 
-        //   Переход по гиперссылке (передаётся как параметр)
+        // Переход по значению href
         public void ClickLinkByHref(string href)
         {
-            Thread.Sleep(500);
+            ShortDelay();
             driver.FindElement(By.XPath($"//a[@href='{href}']")).Click();
         }
     }

@@ -19,11 +19,9 @@ namespace WebAddressbookTests
         [Test]
         public void AddNewContact()
         {
-            //app.navigationHelper.OpenHomePage();
             app.Navigation.OpenHomePage();
             app.Auth.Login(new AccountData("admin", "secret"));
-            app.Contact.InitNewContact();
-            //contactHelper.InitNewContact();
+            app.Navigation.GoToAddNewContactPage();
 
             ContactDetails contact = new ContactDetails
             (new PersonalInfo

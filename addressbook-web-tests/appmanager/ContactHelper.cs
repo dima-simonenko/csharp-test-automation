@@ -15,10 +15,6 @@ namespace WebAddressbookTests
             : base(driver)
         {
         }
-        public void InitNewContact()
-        {
-            driver.FindElement(By.LinkText("add new")).Click();
-        }
 
         public void FillContactForm(ContactDetails contact)
         {

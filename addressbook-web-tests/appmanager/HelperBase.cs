@@ -1,20 +1,29 @@
-﻿using System;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressbookTests
 {
     public class HelperBase
     {
         protected IWebDriver driver;
+        protected int shortDelay = 500;
+
 
         public HelperBase(IWebDriver driver)
         {
-                this.driver = driver;
+            this.driver = driver;
+        }
+
+        protected void ShortDelay()
+        {
+            Thread.Sleep(shortDelay);
         }
     }
+    
 }
