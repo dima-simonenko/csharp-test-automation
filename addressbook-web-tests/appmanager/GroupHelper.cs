@@ -48,7 +48,7 @@ namespace WebAddressbookTests
 
         public GroupHelper DeleteGroupByIndex(int index)
         {
-            SelectGroupCheckboxByIndex(1);
+            SelectGroupCheckboxByIndex(index);
             ClickDeleteButton();
             return this;
         }

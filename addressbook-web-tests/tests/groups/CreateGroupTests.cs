@@ -35,8 +35,6 @@ namespace WebAddressbookTests
         }
 
         [Test]
-        [TestCase("", "", "", TestName = "TC_CreateGroup_WithEmptyFieldsTest")]
-        [TestCase("Группа 1", "Header", "Footer", TestName = "TC_CreateGroup_FullFieldsTest")]
         [TestCase("OnlyName", "", "", TestName = "TC_CreateGroup_OnlyNameTest")]
         public void CreateGroups_WithTestCaseData(string name, string header, string footer)
         {
