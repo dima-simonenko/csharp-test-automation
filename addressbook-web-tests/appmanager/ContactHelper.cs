@@ -11,12 +11,19 @@ namespace WebAddressbookTests
 {
     public class ContactHelper : HelperBase
     {
-        public ContactHelper(IWebDriver driver)
-            : base(driver)
+        public ContactHelper(ApplicationManager manager) : base(manager)
         {
         }
 
-        public void FillContactForm(ContactDetails contact)
+        public ContactHelper Create(ContactDetails contact)
+        {
+            FillContactForm(contact);
+            SelectGroupFromDropdown("[none]");
+            SubmitContactForm();
+            return this;
+        }   
+
+        public ContactHelper FillContactForm(ContactDetails contact)
         {
             FillPersonalInfo(contact.Personal);
             FillJobInfo(contact.Job);
@@ -24,15 +31,17 @@ namespace WebAddressbookTests
             FillWebInfo(contact.Web);
             FillBirthdayInfo(contact.Birthday);
             FillAnniversaryInfo(contact.Anniversary);
+            return this;
         }
 
-        public void SubmitAddNewContact()
+        public ContactHelper SubmitContactForm()
         {
-            driver.FindElement(By.XPath("//div[@id='content']/form/input[20]")).Click();
+            driver.FindElement(By.CssSelector("input[type='submit']")).Click();
+            return this;
         }
 
         //   Заполнение блоков формы
-        public void FillPersonalInfo(PersonalInfo person)
+        public ContactHelper FillPersonalInfo(PersonalInfo person)
         {
             driver.FindElement(By.Name("firstname")).Click();
             driver.FindElement(By.Name("firstname")).Clear();
@@ -46,9 +55,10 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("nickname")).Click();
             driver.FindElement(By.Name("nickname")).Clear();
             driver.FindElement(By.Name("nickname")).SendKeys(person.Nickname);
+            return this;
         }
 
-        public void FillJobInfo(JobInfo job)
+        public ContactHelper FillJobInfo(JobInfo job)
         {
             driver.FindElement(By.Name("title")).Click();
             driver.FindElement(By.Name("title")).Clear();
@@ -59,9 +69,10 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("address")).Click();
             driver.FindElement(By.Name("address")).Clear();
             driver.FindElement(By.Name("address")).SendKeys(job.Address);
+            return this;
         }
 
-        public void FillContactInfo(ContactInfo contactInfo)
+        public ContactHelper FillContactInfo(ContactInfo contactInfo)
         {
             driver.FindElement(By.Name("home")).Click();
             driver.FindElement(By.Name("home")).Clear();
@@ -84,16 +95,18 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("email3")).Click();
             driver.FindElement(By.Name("email3")).Clear();
             driver.FindElement(By.Name("email3")).SendKeys(contactInfo.Email3);
+            return this;
         }
 
-        public void FillWebInfo(WebInfo web)
+        public ContactHelper FillWebInfo(WebInfo web)
         {
             driver.FindElement(By.Name("homepage")).Click();
             driver.FindElement(By.Name("homepage")).Clear();
             driver.FindElement(By.Name("homepage")).SendKeys(web.Homepage);
+            return this;
         }
 
-        public void FillBirthdayInfo(BirthdayInfo bInfo)
+        public ContactHelper FillBirthdayInfo(BirthdayInfo bInfo)
         {
             driver.FindElement(By.Name("bday")).Click();
             new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText(bInfo.Bday.ToString());
@@ -102,9 +115,10 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("byear")).Click();
             driver.FindElement(By.Name("byear")).Clear();
             driver.FindElement(By.Name("byear")).SendKeys(bInfo.Byear.ToString());
+            return this;
         }
 
-        public void FillAnniversaryInfo(AnniversaryInfo anniversary)
+        public ContactHelper FillAnniversaryInfo(AnniversaryInfo anniversary)
         {
             driver.FindElement(By.Name("aday")).Click();
             new SelectElement(driver.FindElement(By.Name("aday"))).SelectByText(anniversary.Aday.ToString());
@@ -113,13 +127,15 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("ayear")).Click();
             driver.FindElement(By.Name("ayear")).Clear();
             driver.FindElement(By.Name("ayear")).SendKeys(anniversary.Ayear.ToString());
+            return this;
         }
 
         //   Выбор группы из списка
-        public void SelectGroupFromDropdown(string groupName)
+        public ContactHelper SelectGroupFromDropdown(string groupName)
         {
             driver.FindElement(By.Name("new_group")).Click();
             new SelectElement(driver.FindElement(By.Name("new_group"))).SelectByText(groupName);
+            return this;
         }
     }
 }

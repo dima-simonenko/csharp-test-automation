@@ -10,41 +10,60 @@ namespace WebAddressbookTests
 {
     public class GroupHelper : HelperBase
     {
-        public GroupHelper(IWebDriver driver) : base(driver) 
+        public GroupHelper(ApplicationManager manager) : base(manager) 
         {
         }
-        public void InitNewGroupCreation()
+
+        public GroupHelper Create(GroupData group)
+        {
+            InitNewGroupCreation();
+            FillGroupForm(group);
+            SubmitGroupCreation();
+            return this;
+        }
+
+        public GroupHelper InitNewGroupCreation()
         {
             driver.FindElement(By.Name("new")).Click();
+            return this;
         }
 
-        public void FillGroupForm(GroupData group)
+
+        public GroupHelper FillGroupForm(GroupData group)
         {
-            driver.FindElement(By.Name("group_name")).Click();
             driver.FindElement(By.Name("group_name")).Clear();
             driver.FindElement(By.Name("group_name")).SendKeys(group.Name);
-            driver.FindElement(By.Name("group_header")).Click();
             driver.FindElement(By.Name("group_header")).Clear();
             driver.FindElement(By.Name("group_header")).SendKeys(group.Header);
-            driver.FindElement(By.Name("group_footer")).Click();
             driver.FindElement(By.Name("group_footer")).Clear();
             driver.FindElement(By.Name("group_footer")).SendKeys(group.Footer);
+            return this;
         }
 
-        public void SubmitGroupCreation()
+        public GroupHelper SubmitGroupCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
+            return this;
         }
 
-        //   Выбор группы через активацию чек-бокса
-        public void SelectGroupCheckbox(int index)
+        public GroupHelper DeleteGroupByIndex(int index)
         {
-            driver.FindElement(By.XPath($"//div[@id='content']/form/span[{index}]/input")).Click();
+            SelectGroupCheckboxByIndex(1);
+            ClickDeleteButton();
+            return this;
         }
 
-        public void DeleteGroups()
+        public GroupHelper SelectGroupCheckboxByIndex(int index)
+        {
+            driver.FindElement(By.XPath("(//input[@name = 'selected[]'])[" + index + "]")).Click();
+            return this;
+        }
+
+        public GroupHelper ClickDeleteButton()
         {
             driver.FindElement(By.Name("delete")).Click();
+            return this;
         }
+       
     }
 }

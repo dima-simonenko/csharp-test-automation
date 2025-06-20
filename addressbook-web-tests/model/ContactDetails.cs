@@ -24,6 +24,7 @@ namespace WebAddressbookTests
             this.birthday = birthday;
             this.anniversary = anniversary;
         }
+
         public ContactDetails(PersonalInfo personal, ContactInfo contact)
         {
             this.personal = personal;

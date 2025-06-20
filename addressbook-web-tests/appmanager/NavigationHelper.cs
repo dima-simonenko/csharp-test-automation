@@ -13,7 +13,7 @@ namespace WebAddressbookTests
     public class NavigationHelper : HelperBase
     {
         private string baseURL;
-        public NavigationHelper(IWebDriver driver, string baseURL) : base(driver)
+        public NavigationHelper(ApplicationManager manager, string baseURL) : base(manager)
         {
             this.baseURL = baseURL;
         }
@@ -51,10 +51,6 @@ namespace WebAddressbookTests
             ShortDelay();
             driver.FindElement(By.LinkText("home page")).Click();
         }
-
-        // =======================
-        //   Универсальные методы
-        // =======================
 
         // Переход по гиперссылке по её видимому тексту (например: "groups", "home page")
         public void ClickLinkTextName(string name)

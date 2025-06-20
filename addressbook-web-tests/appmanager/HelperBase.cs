@@ -12,12 +12,14 @@ namespace WebAddressbookTests
     public class HelperBase
     {
         protected IWebDriver driver;
+        protected ApplicationManager manager;
         protected int shortDelay = 500;
 
 
-        public HelperBase(IWebDriver driver)
+        public HelperBase(ApplicationManager manager)
         {
-            this.driver = driver;
+            this.manager = manager;
+            driver = manager.Driver;
         }
 
         protected void ShortDelay()

@@ -1,8 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI;
 using System;
 using System.Drawing.Text;
 using System.Runtime.InteropServices;
@@ -17,12 +14,8 @@ namespace WebAddressbookTests
     public class AddNewContactTests : TestBase
     {
         [Test]
-        public void AddNewContact()
+        public void AddNewContact_WithAllFieldsFilled()
         {
-            app.Navigation.OpenHomePage();
-            app.Auth.Login(new AccountData("admin", "secret"));
-            app.Navigation.GoToAddNewContactPage();
-
             ContactDetails contact = new ContactDetails
             (new PersonalInfo
                 ("Ivan", "Petrovich", "Smirnov", "QwErTy"),
@@ -37,11 +30,31 @@ namespace WebAddressbookTests
             new AnniversaryInfo
                 (25, "August", 2022));
 
-            app.Contact.FillContactForm(contact);
-            app.Contact.SelectGroupFromDropdown("[none]");
-            app.Contact.SubmitAddNewContact();
+            app.Navigation.GoToAddNewContactPage();
+            app.Contact.Create(contact);
             app.Navigation.ReturnToHomePage();
-            app.Auth.Logout();
         }
-}
+        
+        [Test]
+        public void AddNewContact_WithEmptyFields()
+        {
+            ContactDetails contact = new ContactDetails
+            (new PersonalInfo
+                ("", "", "", ""),
+            new JobInfo
+                ("", "", ""),
+            new ContactInfo
+                ("", "", "", "", "", "", ""),
+            new WebInfo
+                (""),
+            new BirthdayInfo
+                (10, "March", 1993),
+            new AnniversaryInfo
+                (25, "August", 2022));
+
+            app.Navigation.GoToAddNewContactPage();
+            app.Contact.Create(contact);
+            app.Navigation.ReturnToHomePage();
+        }
     }
+}

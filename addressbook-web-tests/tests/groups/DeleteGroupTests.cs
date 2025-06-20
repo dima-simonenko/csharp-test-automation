@@ -15,15 +15,11 @@ namespace WebAddressbookTests
     public class DeleteGroupTests : TestBase
     {
         [Test]
-        public void DeleteGroup()
+        public void DeleteGroup_SelectCheckboxByIndex()
         {
-            app.Navigation.OpenHomePage();
-            app.Auth.Login(new AccountData("admin", "secret"));
             app.Navigation.GoToGroupsPage();
-            app.Groups.SelectGroupCheckbox(1);
-            app.Groups.DeleteGroups();
+            app.Groups.DeleteGroupByIndex(1);
             app.Navigation.ReturnToGroupPage();
-            app.Auth.Logout();
         }
     }
 }
