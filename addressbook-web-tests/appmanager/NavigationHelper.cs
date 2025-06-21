@@ -52,9 +52,10 @@ namespace WebAddressbookTests
             driver.FindElement(By.LinkText("home page")).Click();
         }
 
-        // Переход по гиперссылке по её видимому тексту (например: "groups", "home page")
+        // Переход по гиперссылке по её видимому тексту (например: "groups", "home")
         public void ClickLinkTextName(string name)
         {
+            ShortDelay();
             driver.FindElement(By.LinkText(name)).Click();
         }
 

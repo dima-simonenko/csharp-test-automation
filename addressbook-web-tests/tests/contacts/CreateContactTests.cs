@@ -11,10 +11,10 @@ using WebAddressbookTests;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class AddNewContactTests : TestBase
+    public class CreateContactTests : TestBase
     {
         [Test]
-        public void AddNewContact_WithAllFieldsFilled()
+        public void CreateContact_WithAllFieldsFilled()
         {
             ContactDetails contact = new ContactDetails
             (new PersonalInfo
@@ -30,13 +30,11 @@ namespace WebAddressbookTests
             new AnniversaryInfo
                 (25, "August", 2022));
 
-            app.Navigation.GoToAddNewContactPage();
-            app.Contact.Create(contact);
-            app.Navigation.ReturnToHomePage();
+            app.Contact.Create(contact, "[none]");
         }
         
         [Test]
-        public void AddNewContact_WithEmptyFields()
+        public void CreateContact_WithEmptyFields()
         {
             ContactDetails contact = new ContactDetails
             (new PersonalInfo
@@ -52,9 +50,7 @@ namespace WebAddressbookTests
             new AnniversaryInfo
                 (25, "August", 2022));
 
-            app.Navigation.GoToAddNewContactPage();
-            app.Contact.Create(contact);
-            app.Navigation.ReturnToHomePage();
+            app.Contact.Create(contact, "[none]");
         }
     }
 }

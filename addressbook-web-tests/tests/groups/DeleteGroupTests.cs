@@ -1,9 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.BiDi.Modules.BrowsingContext;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI;
 using System;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -15,11 +11,9 @@ namespace WebAddressbookTests
     public class DeleteGroupTests : TestBase
     {
         [Test]
-        public void DeleteGroup_SelectCheckboxByIndex()
+        public void DeleteGroup_ExistingGroupSelected()
         {
-            app.Navigation.GoToGroupsPage();
-            app.Groups.DeleteGroupByIndex(1);
-            app.Navigation.ReturnToGroupPage();
+            app.Groups.Delete(1);
         }
     }
 }

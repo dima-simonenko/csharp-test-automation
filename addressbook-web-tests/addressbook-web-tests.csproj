@@ -145,6 +145,9 @@
     <Compile Include="model\ContactInfo.cs" />
     <Compile Include="model\JobInfo.cs" />
     <Compile Include="model\PersonalInfo.cs" />
+    <Compile Include="tests\contacts\DeleteContactTests.cs" />
+    <Compile Include="tests\contacts\ModificationContactTests.cs" />
+    <Compile Include="tests\groups\ModificationGroup.cs" />
     <Compile Include="tests\TestBase.cs" />
     <Compile Include="model\WebInfo.cs" />
     <Compile Include="geometry\Circle.cs" />
@@ -153,7 +156,7 @@
     <Compile Include="appmanager\LoginHelper.cs" />
     <Compile Include="appmanager\NavigationHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="tests\contacts\AddNewContactTests.cs" />
+    <Compile Include="tests\contacts\CreateContactTests.cs" />
     <Compile Include="geometry\GeometricTests.cs" />
     <Compile Include="tests\groups\CreateGroupTests.cs" />
     <Compile Include="model\GroupData.cs" />

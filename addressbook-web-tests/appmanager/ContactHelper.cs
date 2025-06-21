@@ -3,6 +3,7 @@ using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using WebAddressbookTests;
@@ -15,13 +16,42 @@ namespace WebAddressbookTests
         {
         }
 
-        public ContactHelper Create(ContactDetails contact)
+        public ContactHelper Create(ContactDetails contact, string groupName)
         {
+            manager.Navigation.GoToAddNewContactPage();
             FillContactForm(contact);
-            SelectGroupFromDropdown("[none]");
+            SelectGroupFromDropdown(groupName);
             SubmitContactForm();
+            manager.Navigation.ReturnToHomePage();
             return this;
-        }   
+        }
+
+        //  Открывает форму редактирования контакта через иконку Edit (карандаш)
+        public ContactHelper Edit(int index, ContactDetails newData)
+        {
+            InitEditContact(index);
+            FillContactForm(newData);
+            SubmitModificationContact();
+            manager.Navigation.ReturnToHomePage();
+            return this;
+        }
+
+        //  Открывает форму редактирования контакта через Details → Modify
+        public ContactHelper Modify(int index, ContactDetails newData)
+        {
+            InitModifyContact(index);
+            FillContactForm(newData);
+            SubmitModificationContact();
+            manager.Navigation.ReturnToHomePage();
+            return this;
+        }
+
+        public ContactHelper Delete(int index)
+        {
+            SelectContactCheckboxByIndex(index);
+            SubmitDeleteContact();
+            return this;
+        }
 
         public ContactHelper FillContactForm(ContactDetails contact)
         {
@@ -34,13 +64,6 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper SubmitContactForm()
-        {
-            driver.FindElement(By.CssSelector("input[type='submit']")).Click();
-            return this;
-        }
-
-        //   Заполнение блоков формы
         public ContactHelper FillPersonalInfo(PersonalInfo person)
         {
             driver.FindElement(By.Name("firstname")).Click();
@@ -130,11 +153,62 @@ namespace WebAddressbookTests
             return this;
         }
 
-        //   Выбор группы из списка
+        public ContactHelper SubmitContactForm()
+        {
+            driver.FindElement(By.CssSelector("input[type='submit']")).Click();
+            return this;
+        }
+
+        public ContactHelper SubmitModificationContact()
+        {
+            ShortDelay();
+            driver.FindElement(By.Name("update")).Click();
+            return this;
+        }
+
+        public ContactHelper SubmitDeleteContact()
+        {
+            //driver.FindElement(By.Name("Delete")).Click();
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            return this;
+        }
+
+        //  Выбор группы из списка (используется только при добавлении контакта)
         public ContactHelper SelectGroupFromDropdown(string groupName)
         {
             driver.FindElement(By.Name("new_group")).Click();
             new SelectElement(driver.FindElement(By.Name("new_group"))).SelectByText(groupName);
+            return this;
+        }
+
+        public ContactHelper SelectContactCheckboxByIndex(int index)
+        {
+            driver.FindElement(By.XPath("(//input[@name = 'selected[]'])[" + index + "]")).Click();
+            return this;
+        }
+
+        //  На домашней странице клик по иконке "Edit" 
+        public ContactHelper InitEditContact(int index)
+        {
+            var editIcons = driver.FindElements(By.XPath("//img[@alt='Edit']"));
+            editIcons[index - 1].Click();
+            //driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
+            return this;
+        }
+
+        //  На домашней странице клик по иконке Details  -> Нажатие на кнопку Modify
+        public ContactHelper InitModifyContact(int index)
+        {
+            OpenDetailsContact(index);
+            driver.FindElement(By.Name("modifiy")).Click();
+            ShortDelay();
+            return this;
+        }
+
+        public ContactHelper OpenDetailsContact(int index)
+        {
+            var detailIcons = driver.FindElements(By.XPath("//img[@alt='Details']"));
+            detailIcons[index - 1].Click();
             return this;
         }
     }
