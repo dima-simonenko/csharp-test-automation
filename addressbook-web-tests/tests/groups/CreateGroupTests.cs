@@ -6,7 +6,7 @@ using System.Text;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class CreateGroupTests : TestBase
+    public class CreateGroupTests : AuthTestBase
     {
         [Test]
         public void CreateGroup_FullFields()

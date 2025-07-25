@@ -25,10 +25,28 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public bool CheckEntityPresence()
+        {
+            manager.Navigation.GoToGroupsPage();
+            return driver.FindElements(By.Name("selected[]")).Count > 0;
+        }
+
+        public void AddAtLeastOneGroup()
+        {
+            if (!CheckEntityPresence())
+            {
+                Create(new GroupData("Default Name")
+                {
+                    Header = "Default Header",
+                    Footer = "Default Footer"
+                });
+            }
+        }
+
         public GroupHelper Delete(int index)
         {
             manager.Navigation.GoToGroupsPage();
-            SelectGroupCheckboxByIndex(index);
+            SelectGroupCheckbox(index);
             SubmitDeleteGroup();
             manager.Navigation.ReturnToGroupPage();
             return this;
@@ -37,7 +55,7 @@ namespace WebAddressbookTests
         public GroupHelper Modify(int index, GroupData newData)
         {
             manager.Navigation.GoToGroupsPage();
-            SelectGroupCheckboxByIndex(index);
+            SelectGroupCheckbox(index);
             InitEditGroup();
             FillGroupForm(newData);
             SubmitUpdateGroup();
@@ -47,49 +65,90 @@ namespace WebAddressbookTests
 
         public GroupHelper FillGroupForm(GroupData group)
         {
-            driver.FindElement(By.Name("group_name")).Click();
-            driver.FindElement(By.Name("group_name")).Clear();
-            driver.FindElement(By.Name("group_name")).SendKeys(group.Name);
-            driver.FindElement(By.Name("group_header")).Click();
-            driver.FindElement(By.Name("group_header")).Clear();
-            driver.FindElement(By.Name("group_header")).SendKeys(group.Header);
-            driver.FindElement(By.Name("group_footer")).Click();
-            driver.FindElement(By.Name("group_footer")).Clear();
-            driver.FindElement(By.Name("group_footer")).SendKeys(group.Footer);
+            Type(By.Name("group_name"), group.Name);
+            Type(By.Name("group_header"), group.Header);
+            Type(By.Name("group_footer"), group.Footer);
             return this;
+        }
+
+        private void ClickButtonByName(string name)
+        {
+            driver.FindElement(By.Name(name)).Click();
         }
 
         public GroupHelper InitCreationNewGroup()
         {
-            driver.FindElement(By.Name("new")).Click();
+            if (IsElementPresent(By.Name("new")))
+            {
+                driver.FindElement(By.Name("new")).Click();
+                ShortDelay();
+            }
+            else
+            {
+                throw new Exception("Кнопка 'New group' (name='new') не найдена. Убедись, что ты на странице групп.");
+            }
             return this;
         }
 
         public GroupHelper SubmitGroupCreation()
         {
-            driver.FindElement(By.Name("submit")).Click();
+            if (IsElementPresent(By.Name("submit")))
+            {
+                driver.FindElement(By.Name("submit")).Click();
+                ShortDelay();
+            }
+            else
+            {
+                throw new Exception("Кнопка 'Submit' (name='submit') не найдена. Возможно, форма создания не открыта.");
+            }
             return this;
         }
 
         public GroupHelper InitEditGroup()
         {
-            driver.FindElement(By.Name("edit")).Click();
+            if (IsElementPresent(By.Name("edit")))
+            {
+                driver.FindElement(By.Name("edit")).Click();
+                ShortDelay();
+            }
+            else
+            {
+                throw new Exception("Кнопка 'Edit' (name='edit') не найдена.");
+            }
             return this;
         }
 
         public GroupHelper SubmitUpdateGroup()
         {
-            driver.FindElement(By.Name("update")).Click();
+            if (IsElementPresent(By.Name("update")))
+            {
+                driver.FindElement(By.Name("update")).Click();
+                ShortDelay();
+            }
+            else
+            {
+                throw new Exception("Кнопка 'Update' (name='update') не найдена.");
+            }
             return this;
         }
 
         public GroupHelper SubmitDeleteGroup()
         {
-            driver.FindElement(By.Name("delete")).Click();
+            if (IsElementPresent(By.Name("delete")))
+            {
+                driver.FindElement(By.Name("delete")).Click();
+                ShortDelay();
+            }
+            else
+            {
+                throw new Exception("Кнопка 'Delete' (name='delete') не найдена.");
+            }
             return this;
         }
 
-        public GroupHelper SelectGroupCheckboxByIndex(int index)
+        
+
+        public GroupHelper SelectGroupCheckbox(int index)
         {
             driver.FindElement(By.XPath("(//input[@name = 'selected[]'])[" + index + "]")).Click();
             return this;

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,56 +14,73 @@ namespace WebAddressbookTests
     public class NavigationHelper : HelperBase
     {
         private string baseURL;
-        public NavigationHelper(ApplicationManager manager, string baseURL) : base(manager)
+        public NavigationHelper(ApplicationManager manager, string baseURL) 
+            : base(manager)
         {
             this.baseURL = baseURL;
         }
 
-        // Жёсткий переход на главную страницу по baseURL
-        public void OpenHomePage()
+        public void GoToHomePage()
         {
-            driver.Navigate().GoToUrl(baseURL);
+            if (driver.Url == baseURL + "/addressbook/")
+            {
+                return;
+            }
+            ShortDelay();
+            driver.Navigate().GoToUrl(baseURL + "/addressbook/");
         }
 
-        // Переход по гиперссылке "groups"
         public void GoToGroupsPage()
         {
+            if (driver.Url == baseURL + "/addressbook/group.php"
+                && IsElementPresent(By.XPath("//h1[text()='Groups']")))
+            {
+                return;
+            }
+
             ShortDelay();
             driver.FindElement(By.LinkText("groups")).Click();
         }
 
-        // Переход по гиперссылке "add new" на страницу создания контакта
         public void GoToAddNewContactPage()
         {
+            if (driver.Url == baseURL + "/addressbook/edit.php"
+                && IsElementPresent(By.XPath("//h1[text()='Edit / add address book entry']")))
+            {
+                return;
+            }
+
             ShortDelay();
             driver.FindElement(By.LinkText("add new")).Click();
         }
 
-        // Переход по гиперссылке "group page" после создания/удаления группы
+        // Переход по гиперссылке "group page", если она отображается после создания/удаления группы
         public void ReturnToGroupPage()
         {
-            ShortDelay();
-            driver.FindElement(By.LinkText("group page")).Click();
+            if (IsElementPresent(By.XPath("//div[@class='msgbox']//a[text()='group page']")))
+            {
+                driver.FindElement(By.LinkText("group page")).Click();
+            }
         }
 
-        // Переход по гиперссылке "home page" (после создания контакта)
+        // Переход по гиперссылке "home page", если после добавления контакта отображаются  гиперссылки "add next" и "home page"
         public void ReturnToHomePage()
         {
-            ShortDelay();
-            driver.FindElement(By.LinkText("home page")).Click();
+            if (IsElementPresent(By.LinkText("home page")))
+            {
+                driver.FindElement(By.LinkText("home page")).Click();
+            }
         }
 
         // Переход по гиперссылке по её видимому тексту (например: "groups", "home")
         public void ClickLinkTextName(string name)
         {
-            ShortDelay();
             driver.FindElement(By.LinkText(name)).Click();
         }
 
         // Переход по значению href
         public void ClickLinkByHref(string href)
         {
-            ShortDelay();
             driver.FindElement(By.XPath($"//a[@href='{href}']")).Click();
         }
     }

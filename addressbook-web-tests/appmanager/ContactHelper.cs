@@ -22,6 +22,7 @@ namespace WebAddressbookTests
             FillContactForm(contact);
             SelectGroupFromDropdown(groupName);
             SubmitContactForm();
+            ShortDelay();
             manager.Navigation.ReturnToHomePage();
             return this;
         }
@@ -32,6 +33,7 @@ namespace WebAddressbookTests
             InitEditContact(index);
             FillContactForm(newData);
             SubmitModificationContact();
+            ShortDelay();
             manager.Navigation.ReturnToHomePage();
             return this;
         }
@@ -42,8 +44,35 @@ namespace WebAddressbookTests
             InitModifyContact(index);
             FillContactForm(newData);
             SubmitModificationContact();
+            ShortDelay();
             manager.Navigation.ReturnToHomePage();
             return this;
+        }
+
+        public ContactDetails DefaultContact()
+        {
+            return new ContactDetails(
+                new PersonalInfo("Default", "", "", ""),
+                new JobInfo("", "", ""),
+                new ContactInfo("", "", "", "", "", "", ""),
+                new WebInfo(""),
+                new BirthdayInfo(1, "January", 1990),
+                new AnniversaryInfo(1, "January", 2000)
+            );
+        }
+
+        public bool CheckEntityPresence()
+        {
+            manager.Navigation.GoToHomePage();
+            return driver.FindElements(By.Name("selected[]")).Count > 0;
+        }
+
+        public void AddAtLeastOneContact()
+        {
+            if (!CheckEntityPresence())
+            {
+                Create(DefaultContact(), "[none]");
+            }
         }
 
         public ContactHelper Delete(int index)
@@ -66,66 +95,36 @@ namespace WebAddressbookTests
 
         public ContactHelper FillPersonalInfo(PersonalInfo person)
         {
-            driver.FindElement(By.Name("firstname")).Click();
-            driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys(person.Firstname);
-            driver.FindElement(By.Name("middlename")).Click();
-            driver.FindElement(By.Name("middlename")).Clear();
-            driver.FindElement(By.Name("middlename")).SendKeys(person.Middlename);
-            driver.FindElement(By.Name("lastname")).Click();
-            driver.FindElement(By.Name("lastname")).Clear();
-            driver.FindElement(By.Name("lastname")).SendKeys(person.Lastname);
-            driver.FindElement(By.Name("nickname")).Click();
-            driver.FindElement(By.Name("nickname")).Clear();
-            driver.FindElement(By.Name("nickname")).SendKeys(person.Nickname);
+            Type(By.Name("firstname"), person.Firstname);
+            Type(By.Name("middlename"), person.Middlename);
+            Type(By.Name("lastname"), person.Lastname);
+            Type(By.Name("nickname"), person.Nickname);
             return this;
         }
 
         public ContactHelper FillJobInfo(JobInfo job)
         {
-            driver.FindElement(By.Name("title")).Click();
-            driver.FindElement(By.Name("title")).Clear();
-            driver.FindElement(By.Name("title")).SendKeys(job.Title);
-            driver.FindElement(By.Name("company")).Click();
-            driver.FindElement(By.Name("company")).Clear();
-            driver.FindElement(By.Name("company")).SendKeys(job.Company);
-            driver.FindElement(By.Name("address")).Click();
-            driver.FindElement(By.Name("address")).Clear();
-            driver.FindElement(By.Name("address")).SendKeys(job.Address);
+            Type(By.Name("title"), job.Title);
+            Type(By.Name("company"), job.Company);
+            Type(By.Name("address"), job.Address);
             return this;
         }
 
         public ContactHelper FillContactInfo(ContactInfo contactInfo)
         {
-            driver.FindElement(By.Name("home")).Click();
-            driver.FindElement(By.Name("home")).Clear();
-            driver.FindElement(By.Name("home")).SendKeys(contactInfo.Home);
-            driver.FindElement(By.Name("mobile")).Click();
-            driver.FindElement(By.Name("mobile")).Clear();
-            driver.FindElement(By.Name("mobile")).SendKeys(contactInfo.Mobile);
-            driver.FindElement(By.Name("work")).Click();
-            driver.FindElement(By.Name("work")).Clear();
-            driver.FindElement(By.Name("work")).SendKeys(contactInfo.Work);
-            driver.FindElement(By.Name("fax")).Click();
-            driver.FindElement(By.Name("fax")).Clear();
-            driver.FindElement(By.Name("fax")).SendKeys(contactInfo.Fax);
-            driver.FindElement(By.Name("email")).Click();
-            driver.FindElement(By.Name("email")).Clear();
-            driver.FindElement(By.Name("email")).SendKeys(contactInfo.Email);
-            driver.FindElement(By.Name("email2")).Click();
-            driver.FindElement(By.Name("email2")).Clear();
-            driver.FindElement(By.Name("email2")).SendKeys(contactInfo.Email2);
-            driver.FindElement(By.Name("email3")).Click();
-            driver.FindElement(By.Name("email3")).Clear();
-            driver.FindElement(By.Name("email3")).SendKeys(contactInfo.Email3);
+            Type(By.Name("home"), contactInfo.Home);
+            Type(By.Name("mobile"), contactInfo.Mobile);
+            Type(By.Name("work"), contactInfo.Work);
+            Type(By.Name("fax"), contactInfo.Fax);
+            Type(By.Name("email"), contactInfo.Email);
+            Type(By.Name("email2"), contactInfo.Email2);
+            Type(By.Name("email3"), contactInfo.Email3);
             return this;
         }
 
         public ContactHelper FillWebInfo(WebInfo web)
         {
-            driver.FindElement(By.Name("homepage")).Click();
-            driver.FindElement(By.Name("homepage")).Clear();
-            driver.FindElement(By.Name("homepage")).SendKeys(web.Homepage);
+            Type(By.Name("homepage"), web.Homepage);
             return this;
         }
 
@@ -133,11 +132,11 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.Name("bday")).Click();
             new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText(bInfo.Bday.ToString());
+
             driver.FindElement(By.Name("bmonth")).Click();
             new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText(bInfo.Bmonth);
-            driver.FindElement(By.Name("byear")).Click();
-            driver.FindElement(By.Name("byear")).Clear();
-            driver.FindElement(By.Name("byear")).SendKeys(bInfo.Byear.ToString());
+
+            Type(By.Name("byear"), bInfo.Byear.ToString());
             return this;
         }
 
@@ -145,30 +144,35 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.Name("aday")).Click();
             new SelectElement(driver.FindElement(By.Name("aday"))).SelectByText(anniversary.Aday.ToString());
+
             driver.FindElement(By.Name("amonth")).Click();
             new SelectElement(driver.FindElement(By.Name("amonth"))).SelectByText(anniversary.Amonth);
-            driver.FindElement(By.Name("ayear")).Click();
-            driver.FindElement(By.Name("ayear")).Clear();
-            driver.FindElement(By.Name("ayear")).SendKeys(anniversary.Ayear.ToString());
+
+            Type(By.Name("ayear"), anniversary.Ayear.ToString());
             return this;
         }
 
         public ContactHelper SubmitContactForm()
         {
-            driver.FindElement(By.CssSelector("input[type='submit']")).Click();
+            if (IsElementPresent(By.CssSelector("input[type='submit']")))
+            {
+                driver.FindElement(By.CssSelector("input[type='submit']")).Click();
+            }
+            else
+            {
+                throw new Exception("При создании контакта не найдена кнопка 'Submit'.");
+            }
             return this;
         }
 
         public ContactHelper SubmitModificationContact()
         {
-            ShortDelay();
             driver.FindElement(By.Name("update")).Click();
             return this;
         }
 
         public ContactHelper SubmitDeleteContact()
         {
-            //driver.FindElement(By.Name("Delete")).Click();
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             return this;
         }
@@ -191,8 +195,15 @@ namespace WebAddressbookTests
         public ContactHelper InitEditContact(int index)
         {
             var editIcons = driver.FindElements(By.XPath("//img[@alt='Edit']"));
-            editIcons[index - 1].Click();
-            //driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
+            if (editIcons.Count >= index)
+            {
+                editIcons[index - 1].Click();
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException(nameof(index), $"Не найден элемент Edit с индексом {index}.");
+            }
+
             return this;
         }
 
@@ -200,8 +211,15 @@ namespace WebAddressbookTests
         public ContactHelper InitModifyContact(int index)
         {
             OpenDetailsContact(index);
-            driver.FindElement(By.Name("modifiy")).Click();
-            ShortDelay();
+            if (IsElementPresent(By.Name("modifiy")))
+            {
+                driver.FindElement(By.Name("modifiy")).Click();
+            }
+            else
+            {
+                throw new Exception("Кнопка 'Modify' не найдена на странице Details.");
+            }
+
             return this;
         }
 
@@ -209,6 +227,7 @@ namespace WebAddressbookTests
         {
             var detailIcons = driver.FindElements(By.XPath("//img[@alt='Details']"));
             detailIcons[index - 1].Click();
+            //detailIcons[index].Click();
             return this;
         }
     }

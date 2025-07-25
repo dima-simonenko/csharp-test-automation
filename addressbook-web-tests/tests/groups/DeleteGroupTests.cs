@@ -8,12 +8,19 @@ using System.Threading;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class DeleteGroupTests : TestBase
+    public class DeleteGroupTests : AuthTestBase
     {
         [Test]
         public void DeleteGroup_ExistingGroupSelected()
         {
+            // Precondition
+            app.Groups.AddAtLeastOneGroup();
+
+            // Action
             app.Groups.Delete(1);
+
+            // Verification
+
         }
     }
 }

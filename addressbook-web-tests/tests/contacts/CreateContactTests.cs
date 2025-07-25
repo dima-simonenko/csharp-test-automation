@@ -11,7 +11,7 @@ using WebAddressbookTests;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class CreateContactTests : TestBase
+    public class CreateContactTests : AuthTestBase
     {
         [Test]
         public void CreateContact_WithAllFieldsFilled()

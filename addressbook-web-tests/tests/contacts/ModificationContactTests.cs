@@ -8,12 +8,16 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ModificationContactTests : TestBase
+    public class ModificationContactTests : AuthTestBase
     {
         [Test]
         public void ModifyContact_ThroughEditIcon()
         {
-           ContactDetails newData = new ContactDetails
+            // Precondition
+            app.Contact.AddAtLeastOneContact();
+
+            // Action
+            ContactDetails newData = new ContactDetails
            (new PersonalInfo
                ("ffdsf", "sdfsf", "sdf", "sdfsdf"),
             new JobInfo
@@ -28,10 +32,17 @@ namespace WebAddressbookTests
                 (25, "August", 2022));
 
             app.Contact.Edit(1, newData);
+
+            // Verication
         }
+
         [Test]
         public void ModifyContact_ThroughDetailsPage()
         {
+            // Precondition
+            app.Contact.AddAtLeastOneContact();
+
+            // Action
             ContactDetails newData = new ContactDetails
             (new PersonalInfo
                 ("Mod1", "Mod2", "Mod3", "Mod4"),
@@ -47,6 +58,9 @@ namespace WebAddressbookTests
                  (25, "August", 2022));
 
             app.Contact.Modify(1, newData);
+
+            // Verication
+
         }
     }
 }

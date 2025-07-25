@@ -13,13 +13,37 @@ namespace WebAddressbookTests
     {
         protected IWebDriver driver;
         protected ApplicationManager manager;
-        protected int shortDelay = 500;
+        protected int shortDelay = 100;
 
 
         public HelperBase(ApplicationManager manager)
         {
             this.manager = manager;
             driver = manager.Driver;
+        } 
+
+        public void Type(By locator, string text)
+        {
+            if (text != null)
+            {
+                var element = driver.FindElement(locator);
+                element.Click();
+                element.Clear();
+                element.SendKeys(text);
+            }
+        }
+
+        public bool IsElementPresent(By by)
+        {
+            try
+            {
+                driver.FindElement(by);
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
         }
 
         protected void ShortDelay()
@@ -27,5 +51,4 @@ namespace WebAddressbookTests
             Thread.Sleep(shortDelay);
         }
     }
-    
 }
