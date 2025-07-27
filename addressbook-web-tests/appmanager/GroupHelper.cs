@@ -52,6 +52,8 @@ namespace WebAddressbookTests
             return this;
         }
 
+
+
         public GroupHelper Modify(int index, GroupData newData)
         {
             manager.Navigation.GoToGroupsPage();

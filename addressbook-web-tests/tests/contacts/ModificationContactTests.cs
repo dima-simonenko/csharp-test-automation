@@ -17,7 +17,7 @@ namespace WebAddressbookTests
             app.Contact.AddAtLeastOneContact();
 
             // Action
-            ContactDetails newData = new ContactDetails
+           ContactDetails newData = new ContactDetails
            (new PersonalInfo
                ("ffdsf", "sdfsf", "sdf", "sdfsdf"),
             new JobInfo

@@ -24,5 +24,18 @@ namespace WebAddressbookTests
             // Verification
 
         }
+
+        [Test]
+        public void DeleteContact_AllContactsRemoved()
+        {
+            // Precondition
+            app.Contact.AddAtLeastOneContact();
+
+            // Action
+            app.Contact.DeleteAllContacts();
+
+            // Verification
+            Assert.IsFalse(app.Contact.CheckEntityPresence(), "Контакты не были удалены.");
+        }
     }
 }

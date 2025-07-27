@@ -82,6 +82,14 @@ namespace WebAddressbookTests
             return this;
         }
 
+
+        public ContactHelper DeleteAllContacts()
+        {
+            ClickSelectAllCheckbox();
+            SubmitDeleteContact();
+            return this;
+        }
+
         public ContactHelper FillContactForm(ContactDetails contact)
         {
             FillPersonalInfo(contact.Personal);
@@ -191,10 +199,25 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public ContactHelper ClickSelectAllCheckbox()
+        {
+            if (IsElementPresent(By.Id("MassCB")))
+            {
+                driver.FindElement(By.Id("MassCB")).Click();
+            }
+            else
+            {
+                throw new Exception("Чекбокс 'Select All' (id='MassCB') не найден.");
+            }
+
+            return this;
+        }
+
         //  На домашней странице клик по иконке "Edit" 
         public ContactHelper InitEditContact(int index)
         {
             var editIcons = driver.FindElements(By.XPath("//img[@alt='Edit']"));
+
             if (editIcons.Count >= index)
             {
                 editIcons[index - 1].Click();
@@ -211,6 +234,7 @@ namespace WebAddressbookTests
         public ContactHelper InitModifyContact(int index)
         {
             OpenDetailsContact(index);
+
             if (IsElementPresent(By.Name("modifiy")))
             {
                 driver.FindElement(By.Name("modifiy")).Click();
