@@ -46,6 +46,12 @@ namespace WebAddressbookTests
             }
         }
 
+        public HelperBase SelectCheckboxByIndex(int index)
+        {
+            driver.FindElement(By.XPath("(//input[@name = 'selected[]'])[" + (index + 1) + "]")).Click();
+            return this;
+        }
+
         protected void ShortDelay()
         {
             Thread.Sleep(shortDelay);

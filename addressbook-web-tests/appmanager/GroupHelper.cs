@@ -46,7 +46,8 @@ namespace WebAddressbookTests
         public GroupHelper Delete(int index)
         {
             manager.Navigation.GoToGroupsPage();
-            SelectGroupCheckbox(index);
+            SelectCheckboxByIndex(index);
+            //SelectGroupCheckbox(index);
             SubmitDeleteGroup();
             manager.Navigation.ReturnToGroupPage();
             return this;
@@ -57,7 +58,8 @@ namespace WebAddressbookTests
         public GroupHelper Modify(int index, GroupData newData)
         {
             manager.Navigation.GoToGroupsPage();
-            SelectGroupCheckbox(index);
+            SelectCheckboxByIndex(index);
+            //SelectGroupCheckbox(index);
             InitEditGroup();
             FillGroupForm(newData);
             SubmitUpdateGroup();
@@ -148,12 +150,30 @@ namespace WebAddressbookTests
             return this;
         }
 
-        
+        //public GroupHelper SelectGroupCheckbox(int index)
+        //{
+        //    driver.FindElement(By.XPath("(//input[@name = 'selected[]'])[" + index + "]")).Click();
+        //    return this;
+        //}
 
-        public GroupHelper SelectGroupCheckbox(int index)
+        //public GroupHelper SelectGroupCheckbox(int index)
+        //{
+        //    driver.FindElement(By.XPath("(//input[@name = 'selected[]'])[" + (index+1) + "]")).Click();
+        //    return this;
+        //}
+
+
+        public List<GroupData> GetGroupList()
         {
-            driver.FindElement(By.XPath("(//input[@name = 'selected[]'])[" + index + "]")).Click();
-            return this;
+            List<GroupData> groups = new List<GroupData>();
+            manager.Navigation.GoToGroupsPage();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+            
+            foreach (IWebElement element in elements) 
+            {
+                groups.Add(new GroupData(element.Text));
+            }
+            return groups;
         }
     }
 }

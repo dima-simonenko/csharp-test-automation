@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using NUnit.Framework;
-using System;
-using System.Text;
+using System.Collections.Generic;
 
 namespace WebAddressbookTests
 {
@@ -17,8 +16,16 @@ namespace WebAddressbookTests
                 Footer = "Text in footer"
             };
 
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+
             app.Groups.Create(group);
+
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+
+            // Verification
+            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
         }
+
         [Test]
         public void CreateGroup_WithEmptyFields()
         {
@@ -27,15 +34,48 @@ namespace WebAddressbookTests
                 Header = "",
                 Footer = ""
             };
-            
+
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+
             app.Groups.Create(group);
+
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+
+            // Verification
+            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
+        }
+
+        [Test]
+        public void CreateGroup_WithSpecialCharactersInName()
+        {
+            GroupData group = new GroupData("'test")
+            {
+                Header = "",
+                Footer = ""
+            };
+
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+
+            app.Groups.Create(group);
+
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+
+            // Verification
+            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
         }
 
         [Test]
         [TestCase("OnlyName", "", "", TestName = "CreateGroup_OnlyNameTest")]
         public void CreateGroup_WithTestCaseData(string name, string header, string footer)
         {
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+
             app.Groups.Create(new GroupData(name, header, footer));
+
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+
+            // Verification
+            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
         }
     }
 }

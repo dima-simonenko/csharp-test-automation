@@ -1,12 +1,5 @@
 ﻿using NUnit.Framework;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
-
 namespace WebAddressbookTests
 {
     [TestFixture]
@@ -19,10 +12,15 @@ namespace WebAddressbookTests
             app.Contact.AddAtLeastOneContact();
 
             // Action
-            app.Contact.Delete(1);
+            List<ContactDetails> oldContacts = app.Contact.GetContactList();
+
+            app.Contact.Delete(0);
+
+            List<ContactDetails> newContacts = app.Contact.GetContactList();
+            oldContacts.RemoveAt(0);
 
             // Verification
-
+            Assert.AreEqual(oldContacts, newContacts);
         }
 
         [Test]
@@ -32,10 +30,15 @@ namespace WebAddressbookTests
             app.Contact.AddAtLeastOneContact();
 
             // Action
+            List<ContactDetails> oldContacts = app.Contact.GetContactList();
+
             app.Contact.DeleteAllContacts();
 
+            List<ContactDetails> newContacts = app.Contact.GetContactList();
+            oldContacts.Clear();
+
             // Verification
-            Assert.IsFalse(app.Contact.CheckEntityPresence(), "Контакты не были удалены.");
+            Assert.AreEqual(oldContacts, newContacts);
         }
     }
 }

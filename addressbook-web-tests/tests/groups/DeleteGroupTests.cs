@@ -1,9 +1,6 @@
-﻿using Microsoft.VisualStudio.TestPlatform.ObjectModel;
-using NUnit.Framework;
-using System;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
+﻿using NUnit.Framework;
+using System.Collections.Generic;
+
 
 namespace WebAddressbookTests
 {
@@ -16,11 +13,17 @@ namespace WebAddressbookTests
             // Precondition
             app.Groups.AddAtLeastOneGroup();
 
+
             // Action
-            app.Groups.Delete(1);
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+
+            app.Groups.Delete(0);
+
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            oldGroups.RemoveAt(0);
 
             // Verification
-
+            Assert.AreEqual(oldGroups, newGroups);
         }
     }
 }

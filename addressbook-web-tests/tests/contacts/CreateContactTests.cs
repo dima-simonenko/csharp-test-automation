@@ -1,12 +1,5 @@
-﻿using Microsoft.VisualStudio.TestPlatform.ObjectModel;
-using NUnit.Framework;
-using System;
-using System.Drawing.Text;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
-using WebAddressbookTests;
+﻿using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace WebAddressbookTests
 {
@@ -30,7 +23,14 @@ namespace WebAddressbookTests
             new AnniversaryInfo
                 (25, "August", 2022));
 
+            List<ContactDetails> oldContacts = app.Contact.GetContactList();
+
             app.Contact.Create(contact, "[none]");
+
+            List<ContactDetails> newContacts = app.Contact.GetContactList();
+
+            // Verification
+            Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
         }
         
         [Test]
@@ -50,7 +50,14 @@ namespace WebAddressbookTests
             new AnniversaryInfo
                 (25, "August", 2022));
 
+            List<ContactDetails> oldContacts = app.Contact.GetContactList(); 
+            
             app.Contact.Create(contact, "[none]");
+
+            List<ContactDetails> newContacts = app.Contact.GetContactList();
+
+            // Verification
+            Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
         }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace WebAddressbookTests
@@ -17,7 +13,9 @@ namespace WebAddressbookTests
             app.Contact.AddAtLeastOneContact();
 
             // Action
-           ContactDetails newData = new ContactDetails
+            List<ContactDetails> oldContacts = app.Contact.GetContactList();
+
+            ContactDetails newData = new ContactDetails
            (new PersonalInfo
                ("ffdsf", "sdfsf", "sdf", "sdfsdf"),
             new JobInfo
@@ -31,9 +29,13 @@ namespace WebAddressbookTests
             new AnniversaryInfo
                 (25, "August", 2022));
 
-            app.Contact.Edit(1, newData);
+            app.Contact.Modify(0, newData);
+
+            List<ContactDetails> newContacts = app.Contact.GetContactList();
+            oldContacts[0] = newData;
 
             // Verication
+            Assert.AreEqual(oldContacts, newContacts);
         }
 
         [Test]
@@ -43,6 +45,8 @@ namespace WebAddressbookTests
             app.Contact.AddAtLeastOneContact();
 
             // Action
+            List<ContactDetails> oldContacts = app.Contact.GetContactList();
+
             ContactDetails newData = new ContactDetails
             (new PersonalInfo
                 ("Mod1", "Mod2", "Mod3", "Mod4"),
@@ -57,9 +61,13 @@ namespace WebAddressbookTests
              new AnniversaryInfo
                  (25, "August", 2022));
 
-            app.Contact.Modify(1, newData);
+            app.Contact.Modify(0, newData);
+
+            List<ContactDetails> newContacts = app.Contact.GetContactList();
+            oldContacts[0] = newData;
 
             // Verication
+            Assert.AreEqual(oldContacts, newContacts);
 
         }
     }
