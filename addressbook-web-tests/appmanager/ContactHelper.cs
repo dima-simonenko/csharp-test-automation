@@ -27,33 +27,6 @@ namespace WebAddressbookTests
             return this;
         }
 
-        //public List<ContactDetails> GetContactList()
-        //{
-        //    List<ContactDetails> contacts = new List<ContactDetails>();
-        //    manager.Navigation.GoToHomePage();
-
-        //    ICollection<IWebElement> rows = driver.FindElements(By.Name("entry"));
-
-        //    foreach (IWebElement row in rows)
-        //    {
-        //        IList<IWebElement> cells = row.FindElements(By.TagName("td"));
-
-        //        string lastName = cells.Count > 1 ? cells[1].Text : "";
-        //        string firstName = cells.Count > 2 ? cells[2].Text : "";
-
-        //        contacts.Add(new ContactDetails(
-        //            new PersonalInfo(firstName, "", lastName, ""),
-        //            new JobInfo("", "", ""),
-        //            new ContactInfo("", "", "", "", "", "", ""),
-        //            new WebInfo(""),
-        //            new BirthdayInfo(1, "January", 1990),
-        //            new AnniversaryInfo(1, "January", 2000)
-        //        ));
-        //    }
-
-        //    return contacts;
-        //}
-
         public List<ContactDetails> GetContactList()
         {
             List<ContactDetails> contacts = new List<ContactDetails>();
@@ -89,8 +62,6 @@ namespace WebAddressbookTests
 
             return contacts;
         }
-
-
 
 
         //  Открывает форму редактирования контакта через иконку Edit (карандаш)
@@ -144,7 +115,6 @@ namespace WebAddressbookTests
         public ContactHelper Delete(int index)
         {
             SelectCheckboxByIndex(index);
-            //SelectContactCheckboxByIndex(index);
             SubmitDeleteContact();
             return this;
         }
@@ -259,12 +229,6 @@ namespace WebAddressbookTests
             new SelectElement(driver.FindElement(By.Name("new_group"))).SelectByText(groupName);
             return this;
         }
-
-        //public ContactHelper SelectContactCheckboxByIndex(int index)
-        //{
-        //    driver.FindElement(By.XPath("(//input[@name = 'selected[]'])[" + (index + 1) + "]")).Click();
-        //    return this;
-        //}
 
         public ContactHelper ClickSelectAllCheckbox()
         {

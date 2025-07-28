@@ -11,17 +11,15 @@ namespace WebAddressbookTests
         {
             // Precondition
             app.Groups.AddAtLeastOneGroup();
-
-            // Action
             List<GroupData> oldGroups = app.Groups.GetGroupList();
-
             GroupData newData = new GroupData("Modification Text in Name")
             {
                 Header = null,
                 Footer = null
             };
-            app.Groups.Modify(0, newData);
 
+            // Action
+            app.Groups.Modify(0, newData);
             List<GroupData> newGroups = app.Groups.GetGroupList();
             oldGroups[0] = newData;
 
@@ -35,17 +33,15 @@ namespace WebAddressbookTests
         {
             // Precondition
             app.Groups.AddAtLeastOneGroup();
-
-            // Action
             List<GroupData> oldGroups = app.Groups.GetGroupList();
-
             GroupData newData = new GroupData("Modification Text in Name")
             {
                 Header = "Modification header",
                 Footer = "Modification footer"
             };
-            app.Groups.Modify(0, newData);
 
+            // Action
+            app.Groups.Modify(0, newData);
             List<GroupData> newGroups = app.Groups.GetGroupList();
             oldGroups[0] = newData;
 

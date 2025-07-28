@@ -10,12 +10,10 @@ namespace WebAddressbookTests
         {
             // Precondition
             app.Contact.AddAtLeastOneContact();
-
-            // Action
             List<ContactDetails> oldContacts = app.Contact.GetContactList();
 
+            // Action
             app.Contact.Delete(0);
-
             List<ContactDetails> newContacts = app.Contact.GetContactList();
             oldContacts.RemoveAt(0);
 
@@ -28,12 +26,10 @@ namespace WebAddressbookTests
         {
             // Precondition
             app.Contact.AddAtLeastOneContact();
-
-            // Action
             List<ContactDetails> oldContacts = app.Contact.GetContactList();
 
+            // Action
             app.Contact.DeleteAllContacts();
-
             List<ContactDetails> newContacts = app.Contact.GetContactList();
             oldContacts.Clear();
 

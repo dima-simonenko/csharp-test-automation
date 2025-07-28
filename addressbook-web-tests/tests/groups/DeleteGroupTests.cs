@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
 
-
 namespace WebAddressbookTests
 {
     [TestFixture]
@@ -10,19 +9,16 @@ namespace WebAddressbookTests
         [Test]
         public void DeleteGroup_ExistingGroupSelected()
         {
-            // Precondition
+            // Precondition: убедиться, что существует хотя бы одна группа
             app.Groups.AddAtLeastOneGroup();
-
-
-            // Action
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
+            // Action: удалить первую группу
             app.Groups.Delete(0);
-
             List<GroupData> newGroups = app.Groups.GetGroupList();
             oldGroups.RemoveAt(0);
 
-            // Verification
+            // Verification: сравнение списков групп до и после удаления
             Assert.AreEqual(oldGroups, newGroups);
         }
     }

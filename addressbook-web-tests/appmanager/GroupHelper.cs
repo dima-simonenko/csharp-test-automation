@@ -47,19 +47,15 @@ namespace WebAddressbookTests
         {
             manager.Navigation.GoToGroupsPage();
             SelectCheckboxByIndex(index);
-            //SelectGroupCheckbox(index);
             SubmitDeleteGroup();
             manager.Navigation.ReturnToGroupPage();
             return this;
         }
 
-
-
         public GroupHelper Modify(int index, GroupData newData)
         {
             manager.Navigation.GoToGroupsPage();
             SelectCheckboxByIndex(index);
-            //SelectGroupCheckbox(index);
             InitEditGroup();
             FillGroupForm(newData);
             SubmitUpdateGroup();
@@ -149,18 +145,6 @@ namespace WebAddressbookTests
             }
             return this;
         }
-
-        //public GroupHelper SelectGroupCheckbox(int index)
-        //{
-        //    driver.FindElement(By.XPath("(//input[@name = 'selected[]'])[" + index + "]")).Click();
-        //    return this;
-        //}
-
-        //public GroupHelper SelectGroupCheckbox(int index)
-        //{
-        //    driver.FindElement(By.XPath("(//input[@name = 'selected[]'])[" + (index+1) + "]")).Click();
-        //    return this;
-        //}
 
 
         public List<GroupData> GetGroupList()

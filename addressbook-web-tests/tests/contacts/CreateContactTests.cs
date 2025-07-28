@@ -9,6 +9,7 @@ namespace WebAddressbookTests
         [Test]
         public void CreateContact_WithAllFieldsFilled()
         {
+            // Precondition
             ContactDetails contact = new ContactDetails
             (new PersonalInfo
                 ("Ivan", "Petrovich", "Smirnov", "QwErTy"),
@@ -25,8 +26,8 @@ namespace WebAddressbookTests
 
             List<ContactDetails> oldContacts = app.Contact.GetContactList();
 
+            // Action
             app.Contact.Create(contact, "[none]");
-
             List<ContactDetails> newContacts = app.Contact.GetContactList();
 
             // Verification
@@ -36,6 +37,7 @@ namespace WebAddressbookTests
         [Test]
         public void CreateContact_WithEmptyFields()
         {
+            // Precondition
             ContactDetails contact = new ContactDetails
             (new PersonalInfo
                 ("", "", "", ""),
@@ -50,10 +52,10 @@ namespace WebAddressbookTests
             new AnniversaryInfo
                 (25, "August", 2022));
 
-            List<ContactDetails> oldContacts = app.Contact.GetContactList(); 
-            
-            app.Contact.Create(contact, "[none]");
+            List<ContactDetails> oldContacts = app.Contact.GetContactList();
 
+            // Action
+            app.Contact.Create(contact, "[none]");
             List<ContactDetails> newContacts = app.Contact.GetContactList();
 
             // Verification

@@ -11,8 +11,6 @@ namespace WebAddressbookTests
         {
             // Precondition
             app.Contact.AddAtLeastOneContact();
-
-            // Action
             List<ContactDetails> oldContacts = app.Contact.GetContactList();
 
             ContactDetails newData = new ContactDetails
@@ -29,8 +27,8 @@ namespace WebAddressbookTests
             new AnniversaryInfo
                 (25, "August", 2022));
 
+            // Action
             app.Contact.Modify(0, newData);
-
             List<ContactDetails> newContacts = app.Contact.GetContactList();
             oldContacts[0] = newData;
 
@@ -43,8 +41,6 @@ namespace WebAddressbookTests
         {
             // Precondition
             app.Contact.AddAtLeastOneContact();
-
-            // Action
             List<ContactDetails> oldContacts = app.Contact.GetContactList();
 
             ContactDetails newData = new ContactDetails
@@ -61,8 +57,8 @@ namespace WebAddressbookTests
              new AnniversaryInfo
                  (25, "August", 2022));
 
+            // Action
             app.Contact.Modify(0, newData);
-
             List<ContactDetails> newContacts = app.Contact.GetContactList();
             oldContacts[0] = newData;
 
