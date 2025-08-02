@@ -21,9 +21,12 @@ namespace WebAddressbookTests
             // Action
             app.Groups.Create(group);
             List<GroupData> newGroups = app.Groups.GetGroupList();
+            oldGroups.Add(group);
+            oldGroups.Sort();
+            newGroups.Sort();
 
             // Verification
-            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
+            Assert.AreEqual(oldGroups, newGroups);
         }
 
         [Test]
@@ -40,9 +43,12 @@ namespace WebAddressbookTests
             // Action
             app.Groups.Create(group);
             List<GroupData> newGroups = app.Groups.GetGroupList();
+            oldGroups.Add(group);
+            oldGroups.Sort();
+            newGroups.Sort();
 
             // Verification
-            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
+            Assert.AreEqual(oldGroups, newGroups);
         }
 
         [Test]
@@ -59,9 +65,12 @@ namespace WebAddressbookTests
             // Action
             app.Groups.Create(group);
             List<GroupData> newGroups = app.Groups.GetGroupList();
+            oldGroups.Add(group);
+            oldGroups.Sort();
+            newGroups.Sort();
 
             // Verification
-            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
+            Assert.AreEqual(oldGroups, newGroups);
         }
 
         [Test]
@@ -72,11 +81,15 @@ namespace WebAddressbookTests
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
             // Action
-            app.Groups.Create(new GroupData(name, header, footer));
+            GroupData group = new GroupData(name, header, footer);
+            app.Groups.Create(group);
             List<GroupData> newGroups = app.Groups.GetGroupList();
+            oldGroups.Add(group);
+            oldGroups.Sort();
+            newGroups.Sort();
 
             // Verification
-            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
+            Assert.AreEqual(oldGroups, newGroups);
         }
     }
 }

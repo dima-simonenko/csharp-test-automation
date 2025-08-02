@@ -29,8 +29,10 @@ namespace WebAddressbookTests
 
             // Action
             app.Contact.Modify(0, newData);
-            List<ContactDetails> newContacts = app.Contact.GetContactList();
             oldContacts[0] = newData;
+            List<ContactDetails> newContacts = app.Contact.GetContactList();
+            oldContacts.Sort();
+            newContacts.Sort();
 
             // Verication
             Assert.AreEqual(oldContacts, newContacts);
@@ -59,8 +61,10 @@ namespace WebAddressbookTests
 
             // Action
             app.Contact.Modify(0, newData);
-            List<ContactDetails> newContacts = app.Contact.GetContactList();
             oldContacts[0] = newData;
+            List<ContactDetails> newContacts = app.Contact.GetContactList();
+            oldContacts.Sort();
+            newContacts.Sort();
 
             // Verication
             Assert.AreEqual(oldContacts, newContacts);

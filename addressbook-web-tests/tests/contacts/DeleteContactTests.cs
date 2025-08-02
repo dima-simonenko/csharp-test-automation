@@ -13,11 +13,15 @@ namespace WebAddressbookTests
             List<ContactDetails> oldContacts = app.Contact.GetContactList();
 
             // Action
+            ContactDetails deleted = oldContacts[0];
             app.Contact.Delete(0);
             List<ContactDetails> newContacts = app.Contact.GetContactList();
             oldContacts.RemoveAt(0);
+            oldContacts.Sort();
+            newContacts.Sort();
 
             // Verification
+
             Assert.AreEqual(oldContacts, newContacts);
         }
 

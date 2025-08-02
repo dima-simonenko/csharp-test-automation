@@ -12,6 +12,7 @@ namespace WebAddressbookTests
             // Precondition
             app.Groups.AddAtLeastOneGroup();
             List<GroupData> oldGroups = app.Groups.GetGroupList();
+
             GroupData newData = new GroupData("Modification Text in Name")
             {
                 Header = null,
@@ -21,11 +22,12 @@ namespace WebAddressbookTests
             // Action
             app.Groups.Modify(0, newData);
             List<GroupData> newGroups = app.Groups.GetGroupList();
-            oldGroups[0] = newData;
+            oldGroups[0].Name = newData.Name;
+            oldGroups.Sort();
+            newGroups.Sort();
 
             // Verification
             Assert.AreEqual(oldGroups, newGroups);
-
         }
 
         [Test]
@@ -43,11 +45,12 @@ namespace WebAddressbookTests
             // Action
             app.Groups.Modify(0, newData);
             List<GroupData> newGroups = app.Groups.GetGroupList();
-            oldGroups[0] = newData;
+            oldGroups[0].Name = newData.Name;
+            oldGroups.Sort();
+            newGroups.Sort();
 
             // Verification
             Assert.AreEqual(oldGroups, newGroups);
-
         }
     }
 }

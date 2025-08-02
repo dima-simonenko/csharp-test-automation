@@ -29,9 +29,12 @@ namespace WebAddressbookTests
             // Action
             app.Contact.Create(contact, "[none]");
             List<ContactDetails> newContacts = app.Contact.GetContactList();
+            oldContacts.Add(contact);
+            oldContacts.Sort();
+            newContacts.Sort();
 
             // Verification
-            Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
+            Assert.AreEqual(oldContacts, newContacts);
         }
         
         [Test]
@@ -57,9 +60,12 @@ namespace WebAddressbookTests
             // Action
             app.Contact.Create(contact, "[none]");
             List<ContactDetails> newContacts = app.Contact.GetContactList();
+            oldContacts.Add(contact);
+            oldContacts.Sort();
+            newContacts.Sort();
 
             // Verification
-            Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
+            Assert.AreEqual(oldContacts, newContacts);
         }
     }
 }
