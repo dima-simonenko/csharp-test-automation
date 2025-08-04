@@ -15,6 +15,9 @@ namespace WebAddressbookTests
             // Action
             ContactDetails deleted = oldContacts[0];
             app.Contact.Delete(0);
+
+            Assert.AreEqual(oldContacts.Count - 1, app.Contact.GetContactCount());
+
             List<ContactDetails> newContacts = app.Contact.GetContactList();
             oldContacts.RemoveAt(0);
             oldContacts.Sort();

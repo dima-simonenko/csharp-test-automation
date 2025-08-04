@@ -15,6 +15,9 @@ namespace WebAddressbookTests
 
             // Action: удалить первую группу
             app.Groups.Delete(0);
+
+            Assert.AreEqual(oldGroups.Count - 1, app.Groups.GetGroupCount());
+
             List<GroupData> newGroups = app.Groups.GetGroupList();
             oldGroups.RemoveAt(0);
 

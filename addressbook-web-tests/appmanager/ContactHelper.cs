@@ -27,41 +27,74 @@ namespace WebAddressbookTests
             return this;
         }
 
+        private List<ContactDetails> contactCache = null;
         public List<ContactDetails> GetContactList()
         {
-            List<ContactDetails> contacts = new List<ContactDetails>();
-            manager.Navigation.GoToHomePage();
-            ICollection<IWebElement> rows = driver.FindElements(By.Name("entry"));
-
-            foreach (IWebElement row in rows)
+            if (contactCache == null)
             {
-                IList<IWebElement> cells = row.FindElements(By.TagName("td"));
+                contactCache = new List<ContactDetails>();
+                manager.Navigation.GoToHomePage();
+                ICollection<IWebElement> rows = driver.FindElements(By.Name("entry"));
 
-                string lastName;
-                if (cells.Count > 1)
+                foreach (IWebElement row in rows)
                 {
-                    lastName = cells[1].Text;
-                }
-                else
-                {
-                    lastName = "";
-                }
+                    IList<IWebElement> cells = row.FindElements(By.TagName("td"));
+                    string lastname = cells[1].Text;
+                    string firstname = cells[2].Text;
 
-                string firstName;
-                if (cells.Count > 2)
-                {
-                    firstName = cells[2].Text;
+                    contactCache.Add(new ContactDetails(
+                        new PersonalInfo(firstname, "", lastname, ""),
+                        new JobInfo("", "", ""),
+                        new ContactInfo("", "", "", "", "", "", ""),
+                        new WebInfo(""),
+                        new BirthdayInfo(0, "", 0),
+                        new AnniversaryInfo(0, "", 0)
+                    ));
                 }
-                else
-                {
-                    firstName = "";
-                }
-
-                contacts.Add(new ContactDetails(new PersonalInfo(firstName, "", lastName, ""), null, null, null, null, null));
             }
 
-            return contacts;
+            return new List<ContactDetails>(contactCache);
         }
+
+        public int GetContactCount()
+        {
+            return driver.FindElements(By.Name("entry")).Count;
+        }
+        //public List<ContactDetails> GetContactList()
+        //{
+        //    List<ContactDetails> contacts = new List<ContactDetails>();
+        //    manager.Navigation.GoToHomePage();
+        //    ICollection<IWebElement> rows = driver.FindElements(By.Name("entry"));
+
+        //    foreach (IWebElement row in rows)
+        //    {
+        //        IList<IWebElement> cells = row.FindElements(By.TagName("td"));
+
+        //        string lastName;
+        //        if (cells.Count > 1)
+        //        {
+        //            lastName = cells[1].Text;
+        //        }
+        //        else
+        //        {
+        //            lastName = "";
+        //        }
+
+        //        string firstName;
+        //        if (cells.Count > 2)
+        //        {
+        //            firstName = cells[2].Text;
+        //        }
+        //        else
+        //        {
+        //            firstName = "";
+        //        }
+
+        //        contacts.Add(new ContactDetails(new PersonalInfo(firstName, "", lastName, ""), null, null, null, null, null));
+        //    }
+
+        //    return contacts;
+        //}
 
 
         //  Открывает форму редактирования контакта через иконку Edit (карандаш)
@@ -72,6 +105,8 @@ namespace WebAddressbookTests
             SubmitModificationContact();
             ShortDelay();
             manager.Navigation.ReturnToHomePage();
+
+            contactCache = null;
             return this;
         }
 
@@ -83,6 +118,8 @@ namespace WebAddressbookTests
             SubmitModificationContact();
             ShortDelay();
             manager.Navigation.ReturnToHomePage();
+
+            contactCache = null;
             return this;
         }
 
@@ -116,6 +153,8 @@ namespace WebAddressbookTests
         {
             SelectCheckboxByIndex(index);
             SubmitDeleteContact();
+
+            contactCache = null;
             return this;
         }
 
@@ -124,6 +163,8 @@ namespace WebAddressbookTests
         {
             ClickSelectAllCheckbox();
             SubmitDeleteContact();
+
+            contactCache = null;
             return this;
         }
 
@@ -202,6 +243,7 @@ namespace WebAddressbookTests
             if (IsElementPresent(By.CssSelector("input[type='submit']")))
             {
                 driver.FindElement(By.CssSelector("input[type='submit']")).Click();
+                contactCache = null;
             }
             else
             {
@@ -213,12 +255,14 @@ namespace WebAddressbookTests
         public ContactHelper SubmitModificationContact()
         {
             driver.FindElement(By.Name("update")).Click();
+            contactCache = null;
             return this;
         }
 
         public ContactHelper SubmitDeleteContact()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            contactCache = null;
             return this;
         }
 
