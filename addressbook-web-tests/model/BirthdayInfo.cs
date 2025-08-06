@@ -8,50 +8,17 @@ namespace WebAddressbookTests
 {
     public class BirthdayInfo
     {
-        private int bday;
-        private string bmonth;
-        private int byear;
-
         public BirthdayInfo (int bday, string bmonth, int byear)
         {
-            this.bday = bday;
-            this.bmonth = bmonth;
-            this.byear = byear;
+            Bday = bday;
+            Bmonth = bmonth;
+            Byear = byear;
         }
 
-        public int Bday
-        {
-            get
-            {
-                return bday;
-            }
-            set
-            {
-                bday = value;
-            }
-        }
+        public int Bday { get; set; }
 
-        public string Bmonth
-        {
-            get
-            {
-                return bmonth;
-            }
-            set
-            {
-                bmonth = value;
-            }
-        }
-        public int Byear
-        {
-            get
-            {
-                return byear;
-            }
-            set
-            {
-                byear = value;
-            }
-        }
+        public string Bmonth { get; set; }
+
+        public int Byear { get; set; }
     }
 }

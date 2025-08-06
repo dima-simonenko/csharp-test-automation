@@ -12,6 +12,8 @@ namespace WebAddressbookTests
             // Precondition
             app.Groups.AddAtLeastOneGroup();
             List<GroupData> oldGroups = app.Groups.GetGroupList();
+            GroupData oldData = oldGroups[0];
+
 
             GroupData newData = new GroupData("Modification Text in Name")
             {
@@ -31,6 +33,14 @@ namespace WebAddressbookTests
 
             // Verification
             Assert.AreEqual(oldGroups, newGroups);
+
+            foreach (GroupData group in newGroups)
+            {
+                if (group.Id == oldData.Id)
+                {
+                    Assert.AreEqual(newData.Name, group.Name);
+                }
+            }
         }
 
         [Test]
@@ -39,6 +49,8 @@ namespace WebAddressbookTests
             // Precondition
             app.Groups.AddAtLeastOneGroup();
             List<GroupData> oldGroups = app.Groups.GetGroupList();
+            GroupData oldData = oldGroups[0];
+
             GroupData newData = new GroupData("Modification Text in Name")
             {
                 Header = "Modification header",
@@ -57,6 +69,13 @@ namespace WebAddressbookTests
 
             // Verification
             Assert.AreEqual(oldGroups, newGroups);
+            foreach (GroupData group in newGroups)
+            {
+                if (group.Id == oldData.Id)
+                {
+                    Assert.AreEqual(newData.Name, group.Name);
+                }
+            }
         }
     }
 }

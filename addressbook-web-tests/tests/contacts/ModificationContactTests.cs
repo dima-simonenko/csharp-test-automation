@@ -12,8 +12,9 @@ namespace WebAddressbookTests
             // Precondition
             app.Contact.AddAtLeastOneContact();
             List<ContactDetails> oldContacts = app.Contact.GetContactList();
+            ContactDetails oldData = oldContacts[0];
 
-            ContactDetails newData = new ContactDetails
+           ContactDetails newData = new ContactDetails
            (new PersonalInfo
                ("ffdsf", "sdfsf", "sdf", "sdfsdf"),
             new JobInfo
@@ -32,13 +33,22 @@ namespace WebAddressbookTests
 
             Assert.AreEqual(oldContacts.Count, app.Contact.GetContactCount());
 
-            oldContacts[0] = newData;
             List<ContactDetails> newContacts = app.Contact.GetContactList();
+            oldContacts[0] = newData;
             oldContacts.Sort();
             newContacts.Sort();
 
             // Verication
             Assert.AreEqual(oldContacts, newContacts);
+
+            foreach (ContactDetails contact in newContacts)
+            {
+                if (contact.Id == oldData.Id)
+                {
+                    Assert.AreEqual(newData.Personal.Firstname, contact.Personal.Firstname);
+                    Assert.AreEqual(newData.Personal.Lastname, contact.Personal.Lastname);
+                }
+            }
         }
 
         [Test]
@@ -47,6 +57,7 @@ namespace WebAddressbookTests
             // Precondition
             app.Contact.AddAtLeastOneContact();
             List<ContactDetails> oldContacts = app.Contact.GetContactList();
+            ContactDetails oldData = oldContacts[0];
 
             ContactDetails newData = new ContactDetails
             (new PersonalInfo
@@ -67,13 +78,22 @@ namespace WebAddressbookTests
 
             Assert.AreEqual(oldContacts.Count, app.Contact.GetContactCount());
 
-            oldContacts[0] = newData;
             List<ContactDetails> newContacts = app.Contact.GetContactList();
+            oldContacts[0] = newData;
             oldContacts.Sort();
             newContacts.Sort();
 
             // Verication
             Assert.AreEqual(oldContacts, newContacts);
+
+            foreach (ContactDetails contact in newContacts)
+            {
+                if (contact.Id == oldData.Id)
+                {
+                    Assert.AreEqual(newData.Personal.Firstname, contact.Personal.Firstname);
+                    Assert.AreEqual(newData.Personal.Lastname, contact.Personal.Lastname);
+                }
+            }
 
         }
     }

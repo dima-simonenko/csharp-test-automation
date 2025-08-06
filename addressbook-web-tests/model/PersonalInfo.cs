@@ -8,87 +8,29 @@ namespace WebAddressbookTests
 {
     public class PersonalInfo
     {
-        private string firstname;
-        private string middlename;
-        private string lastname;
-        private string nickname;
-        private string photo;
-
         public PersonalInfo(string firstname, string middlename, string lastname, string nickname)
         {
-            this.firstname = firstname;
-            this.middlename = middlename;
-            this.lastname = lastname;
-            this.nickname = nickname;
+            Firstname = firstname;
+            Middlename = middlename;
+            Lastname = lastname;
+            Nickname = nickname;
         }
         public PersonalInfo(string firstname, string middlename, string lastname)
         {
-            this.firstname = firstname;
-            this.middlename = middlename;
-            this.lastname = lastname;
+            Firstname = firstname;
+            Middlename = middlename;
+            Lastname = lastname;
         }
         public PersonalInfo(string firstname, string lastname)
         {
-            this.firstname = firstname;
-            this.lastname = lastname;
+            Firstname = firstname;
+            Lastname = lastname;
         }
 
-        public string Firstname
-        {
-            get
-            {
-                return firstname;
-            }
-            set
-            {
-                firstname = value;
-            }
-        }
-
-        public string Middlename
-        {
-            get
-            {
-                return middlename;
-            }
-            set
-            {
-                middlename = value;
-            }
-        }
-
-        public string Lastname
-        {
-            get
-            {
-                return lastname;
-            }
-            set
-            {
-                lastname = value;
-            }
-        }
-        public string Nickname
-        {
-            get
-            {
-                return nickname;
-            }
-            set
-            {
-                nickname = value;
-            }
-        }
-        public string Photo
-        {
-            get
-            {
-                return photo;
-            }
-            set
-            {
-                photo = value;
-            }
-        }
+        public string Firstname { get; set; }
+        public string Middlename { get; set; }
+        public string Lastname { get; set; }
+        public string Nickname { get; set; }
+        public string Photo { get; set; }
     }
 }

@@ -8,23 +8,11 @@ namespace WebAddressbookTests
 {
     public class WebInfo
     {
-        private string homepage;
-
         public WebInfo(string homepage)
         {
-            this.homepage = homepage;
+            Homepage = homepage;
         }
 
-        public string Homepage
-        {
-            get
-            {
-                return homepage;
-            }
-            set
-            {
-                homepage = value;
-            }
-        }
+        public string Homepage { get; set; }
     }
 }

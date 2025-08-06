@@ -165,7 +165,10 @@ namespace WebAddressbookTests
 
                 foreach (IWebElement element in elements)
                 {
-                    groupCache.Add(new GroupData(element.Text));
+                    groupCache.Add(new GroupData(element.Text)
+                    {
+                        Id = element.FindElement(By.TagName("Input")).GetAttribute("value")
+                    });
                 }
             }
             return new List<GroupData>(groupCache);

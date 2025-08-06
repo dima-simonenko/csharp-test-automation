@@ -39,20 +39,25 @@ namespace WebAddressbookTests
                 foreach (IWebElement row in rows)
                 {
                     IList<IWebElement> cells = row.FindElements(By.TagName("td"));
+
+                    string id = row.FindElement(By.TagName("input")).GetAttribute("value");
+
                     string lastname = cells[1].Text;
                     string firstname = cells[2].Text;
 
-                    contactCache.Add(new ContactDetails(
-                        new PersonalInfo(firstname, "", lastname, ""),
-                        new JobInfo("", "", ""),
-                        new ContactInfo("", "", "", "", "", "", ""),
-                        new WebInfo(""),
-                        new BirthdayInfo(0, "", 0),
-                        new AnniversaryInfo(0, "", 0)
-                    ));
+                    ContactDetails contact = new ContactDetails(
+                    new PersonalInfo(firstname, "", lastname, ""),
+                    new JobInfo("", "", ""),
+                    new ContactInfo("", "", "", "", "", "", ""),
+                    new WebInfo(""),
+                    new BirthdayInfo(0, "", 0),
+                    new AnniversaryInfo(0, "", 0))
+                    {
+                        Id = id
+                    };
+                    contactCache.Add(contact);
                 }
             }
-
             return new List<ContactDetails>(contactCache);
         }
 
@@ -60,42 +65,6 @@ namespace WebAddressbookTests
         {
             return driver.FindElements(By.Name("entry")).Count;
         }
-        //public List<ContactDetails> GetContactList()
-        //{
-        //    List<ContactDetails> contacts = new List<ContactDetails>();
-        //    manager.Navigation.GoToHomePage();
-        //    ICollection<IWebElement> rows = driver.FindElements(By.Name("entry"));
-
-        //    foreach (IWebElement row in rows)
-        //    {
-        //        IList<IWebElement> cells = row.FindElements(By.TagName("td"));
-
-        //        string lastName;
-        //        if (cells.Count > 1)
-        //        {
-        //            lastName = cells[1].Text;
-        //        }
-        //        else
-        //        {
-        //            lastName = "";
-        //        }
-
-        //        string firstName;
-        //        if (cells.Count > 2)
-        //        {
-        //            firstName = cells[2].Text;
-        //        }
-        //        else
-        //        {
-        //            firstName = "";
-        //        }
-
-        //        contacts.Add(new ContactDetails(new PersonalInfo(firstName, "", lastName, ""), null, null, null, null, null));
-        //    }
-
-        //    return contacts;
-        //}
-
 
         //  Открывает форму редактирования контакта через иконку Edit (карандаш)
         public ContactHelper Edit(int index, ContactDetails newData)

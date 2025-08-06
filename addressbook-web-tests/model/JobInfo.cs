@@ -8,60 +8,26 @@ namespace WebAddressbookTests
 {
     public class JobInfo
     {
-        private string title;
-        private string company;
-        private string address;
-
         public JobInfo(string title, string company, string address)
         {
-            this.title = title;
-            this.company = company;
-            this.address = address;
+            Title = title;
+            Company = company;
+            Address = address;
         }
         public JobInfo(string title, string company)
         {
-            this.title = title;
-            this.company = company;
+            Title = title;
+            Company = company;
         }
         public JobInfo(string company)
         {
-            this.company = company;
+            Company = company;
         }
 
-        public string Title
-        {
-            get
-            {
-                return title;
-            }
-            set
-            {
-                title = value;
-            }
-        }
+        public string Title { get; set; }
 
-        public string Company
-        {
-            get
-            {
-                return company;
-            }
-            set
-            {
-                company = value;
-            }
-        }
+        public string Company { get; set; }
 
-        public string Address
-        {
-            get
-            {
-                return address;
-            }
-            set
-            {
-                address = value;
-            }
-        }
+        public string Address { get; set; }
     }
 }

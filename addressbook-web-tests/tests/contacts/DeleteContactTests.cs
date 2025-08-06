@@ -11,9 +11,9 @@ namespace WebAddressbookTests
             // Precondition
             app.Contact.AddAtLeastOneContact();
             List<ContactDetails> oldContacts = app.Contact.GetContactList();
+            ContactDetails deleted = oldContacts[0];
 
             // Action
-            ContactDetails deleted = oldContacts[0];
             app.Contact.Delete(0);
 
             Assert.AreEqual(oldContacts.Count - 1, app.Contact.GetContactCount());
@@ -26,6 +26,11 @@ namespace WebAddressbookTests
             // Verification
 
             Assert.AreEqual(oldContacts, newContacts);
+
+            foreach (ContactDetails contact in newContacts)
+            {
+                Assert.AreNotEqual(deleted.Id, contact.Id);
+            }
         }
 
         [Test]
@@ -34,6 +39,7 @@ namespace WebAddressbookTests
             // Precondition
             app.Contact.AddAtLeastOneContact();
             List<ContactDetails> oldContacts = app.Contact.GetContactList();
+            ContactDetails deleted = oldContacts[0];
 
             // Action
             app.Contact.DeleteAllContacts();
@@ -42,6 +48,11 @@ namespace WebAddressbookTests
 
             // Verification
             Assert.AreEqual(oldContacts, newContacts);
+
+            foreach (ContactDetails contact in newContacts)
+            {
+                Assert.AreNotEqual(deleted.Id, contact.Id);
+            }
         }
     }
 }
